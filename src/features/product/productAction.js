@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
+const baseURL = 'https://olx-server-livid.vercel.app'
 let token = localStorage.getItem('token')
 export const addProduct = createAsyncThunk('addProduct', async (data, { rejectWithValue }) => {
     try {
-        const response =await fetch('http://localhost:3003/product', {
+        const response =await fetch(`${baseURL}3/product`, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -24,7 +24,7 @@ export const addProduct = createAsyncThunk('addProduct', async (data, { rejectWi
 
 export const getProduct = createAsyncThunk('getProducts', async (data, { rejectWithValue }) => {
     try {
-        const response =await fetch('http://localhost:3003/getproducts', {
+        const response =await fetch(`${baseURL}/getproducts`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -42,8 +42,9 @@ export const getProduct = createAsyncThunk('getProducts', async (data, { rejectW
 
 
 export const getMyProduct = createAsyncThunk('getMyProducts', async (data, { rejectWithValue }) => {
+    
     try {
-        const response =await fetch('http://localhost:3003/myProducts', {
+        const response =await fetch(`${baseURL}/myProducts`, {
             method: 'GET',
             credentials: 'include',
             headers: {
@@ -64,7 +65,7 @@ export const getMyProduct = createAsyncThunk('getMyProducts', async (data, { rej
 
  export const updateProduct = createAsyncThunk('updateProduct', async ({id,data}, { rejectWithValue }) => {
                     try {
-                        const response =await fetch(`http://localhost:3003/product/${id}`, {
+                        const response =await fetch(`${baseURL}/product/${id}`, {
                             method: 'PUT',
                             credentials: 'include',
                             headers: {
@@ -86,7 +87,7 @@ export const getMyProduct = createAsyncThunk('getMyProducts', async (data, { rej
                 })
 export const deleteProduct = createAsyncThunk('deleteProduct', async ({id,data}, { rejectWithValue }) => {
                     try {
-                        const response =await fetch(`http://localhost:3003/product/${id}`, {
+                        const response =await fetch(`${baseURL}/product/${id}`, {
                             method: 'POST',
                             credentials: 'include',
                             headers: {
