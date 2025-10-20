@@ -4,6 +4,7 @@ import {getProduct} from '../../features/product/productAction'
 import BoxexCategory from './BoxexCategory'
 import { useDispatch, useSelector } from 'react-redux'
 import Footer from './Footer'
+import ProductModal from './ProductModal'
 
 const Products = () => {
     
@@ -108,7 +109,7 @@ const Products = () => {
                         </div>))} </div>
             </div>
                         <Footer/>
-            {selectedProduct&&(
+            {selectedProduct &&(
             <ProductModal product={selectedProduct} onClose={closeModal} isMyProfile={false}/>
             )}</>
     )
