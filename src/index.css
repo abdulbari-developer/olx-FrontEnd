@@ -269,12 +269,16 @@ width: 105px;
 .price{
     font-size: 1rem;
     font-weight: 900;
-    padding: 15px;
-
+    padding: 15px 0 15px 8px;
+    display: flex;
+    align-items: center;
+}
+.p-price{
+  width: 190px;
 }
 .fa-heart{
     font-size: 1rem;
-    padding-left: 120px;
+    /* padding-left: 120px; */
 }
 
 .product-title{
@@ -832,3 +836,44 @@ margin: 0 10px;
     justify-content: center;
   }
 }
+.pagination-container {
+  margin: 20px auto 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pagination-container button {
+  background-color: white;
+  border: 1px solid #d9d9d9;
+  color: #002f34; /* OLX dark teal color */
+  padding: 6px 14px;
+  font-size: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.pagination-container button:hover {
+  border-color: #002f34;
+  color: white;
+  background-color: #002f34;
+  transform: translateY(-1px);
+}
+
+.pagination-container button[disabled] {
+  background-color: #f1f1f1;
+  color: #999;
+  border-color: #ddd;
+  cursor: not-allowed;
+}
+
+.pagination-container button.active {
+  background-color: #002f34;
+  color: white;
+  border-color: #002f34;
+  font-weight: bold;
+}
+
+

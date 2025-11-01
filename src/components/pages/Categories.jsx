@@ -18,7 +18,20 @@ import product from '../product_list'
 import { useNavigate } from 'react-router-dom'
 
 const Categories = () => {
-    let categories = ["Mobiles", "Vehicles", 'Properties For Sale', 'Properties For Rent', 'Electronics & Home', 'Bikes', "Business & Industrial", 'Services', 'Jobs', 'Animal', 'Furniture & Home Decor', 'Fashion & Beauty', 'Books, Sports & Hobbies', 'Kids']
+    let categories = [ "Mobiles",
+  "Vehicles",
+  "Properties For Sale",
+  "Properties For Rent",
+  "Electronics & Home",
+  "Bikes",
+  "Business & Industrial",
+  "Services",
+  "Jobs",
+  "Animal",
+  "Furniture & Home Decor",
+  "Fashion & Beauty",
+  "Books, Sports & Hobbies",
+  "Kids"]
     let cates=[
         
         {
@@ -67,12 +80,12 @@ const Categories = () => {
             let selected = e.target.value;
             setselectCategary(selected)
             if(selected){
-                navigate(`/Categories/${selected}`)
-            }
-        }
-        const handleCategorySelect=(category)=>{
-            setselectCategary(category)
-            navigate(`/Categories/${category}`)
+navigate(`/category/${selected}`)
+}
+}
+const handleCategorySelect=(category)=>{
+    setselectCategary(category)
+    navigate(`/category/${category}`)
         }
         
         

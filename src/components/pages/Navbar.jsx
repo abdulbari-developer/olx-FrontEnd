@@ -64,9 +64,10 @@ const Navbar = () => {
   let navigate = useNavigate()
   const handleClick = (cat)=>{
     setselectCategary(cat)
-    navigate(`/Categories/${cat}`)
+    navigate(`/category/${cat}`)
   }
   const token =localStorage.getItem('token')
+  const isLoggedIn = token && token !== "undefined" && token !== "null";
   return (
     <>
     <div className='nav'>
@@ -89,7 +90,7 @@ const Navbar = () => {
           <img src={notification} alt="" className='icon' />
          <Link to='/MyProfile'> <img src={profile} alt="" className='icon pro'/></Link>
           <img src={cart} alt="" className='icon'/>
-          {token?
+          {isLoggedIn?
         <Link className='btn-sell' to='/SellForm'> &#43; Sell</Link>:
         <Link className='btn-sell' to='/login'> Login</Link>
           }

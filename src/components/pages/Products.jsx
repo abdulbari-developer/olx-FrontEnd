@@ -5,6 +5,8 @@ import BoxexCategory from './BoxexCategory'
 import { useDispatch, useSelector } from 'react-redux'
 import Footer from './Footer'
 import ProductModal from './ProductModal'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const Products = () => {
     
@@ -19,20 +21,28 @@ const Products = () => {
     useEffect(() => {
         dispatch(getProduct())
     },[dispatch])
-    
+    useEffect(() => {
+        if (message) {
+          if (product?.status === 0) {
+            toast.error(message, { theme: 'colored' })
+          } else {
+            toast.success(message, { theme: 'colored' })
+          }
+        }
+      }, [message])
     return (
         <>
              
             <div className='products'>
                 {loading && <h1>LOADING.......</h1>}
-        {error && <p>{message}</p>}
-        {message && <p>{message}</p>}
+        {error && toast.error({message})}
+    
                 <h2 className='products-h2'>Mobiles</h2>
                 <div className="product-container">
         {product.filter(item => item.category === 'Mobiles').slice(0, 4).map((item, index) => (
                         <div className="product-card" key={index} onClick={()=> openModal(item,false)}>
-                            <img src={car} alt="" className='product-img' />
-                            <p className='price'>RS {item.price}  <span><i className="fa-regular fa-heart"></i></span></p>
+                            <img src={item.productImage? item.productImage:car } alt="" className='product-img' />
+                            <p className='price'><span className='price p-price'>RS {item.price}</span>  <span><i className="fa-regular fa-heart"></i></span></p>
                             <p className="product-title">{item.title}</p>
                             <p className="location">{item.productType}</p>
                             <p className="time">{item.createdAt}</p>
@@ -41,8 +51,8 @@ const Products = () => {
                 <div className="product-container">
                     {product.filter(item => item.category === 'Vehicles').slice(0, 4).map((item, index) => (
                         <div className="product-card" key={index} onClick={()=> openModal(item,false)}>
-                            <img src={car} alt="" className='product-img' />
-                            <p className='price'>RS {item.price}  <span><i className="fa-regular fa-heart"></i></span></p>
+                            <img src={item.productImage? item.productImage:car} alt="" className='product-img' />
+                            <p className='price'><span className='price p-price'>RS {item.price}</span>  <span><i className="fa-regular fa-heart"></i></span></p>
                             <p className="product-title">{item.title}</p>
                             <p className="location">{item.productType}</p>
                             <p className="time">{item.createdAt}</p>
@@ -51,8 +61,8 @@ const Products = () => {
                 <div className="product-container">
                     {product.filter(item => item.category === 'Properties For Sale').slice(0, 4).map((item, index) => (
                         <div className="product-card" key={index} onClick={()=> openModal(item,false)}>
-                            <img src={car} alt="" className='product-img' />
-                            <p className='price'>RS {item.price}  <span><i className="fa-regular fa-heart"></i></span></p>
+                            <img src={item.productImage? item.productImage:car} alt="" className='product-img' />
+                            <p className='price'><span className='price p-price'>RS {item.price}</span>  <span><i className="fa-regular fa-heart"></i></span></p>
                             <p className="product-title">{item.title}</p>
                             <p className="location">{item.productType}</p>
                             <p className="time">{item.createdAt}</p>
@@ -61,8 +71,8 @@ const Products = () => {
                 <div className="product-container">
                     {product.filter(item => item.category === 'Bikes').slice(0, 4).map((item, index) => (
                         <div className="product-card" key={index} onClick={()=> openModal(item,false)}>
-                            <img src={car} alt="" className='product-img' />
-                            <p className='price'>RS {item.price}  <span><i className="fa-regular fa-heart"></i></span></p>
+                            <img src={item.productImage? item.productImage:car} alt="" className='product-img' />
+                            <p className='price'><span className='price p-price'>RS {item.price}</span>  <span><i className="fa-regular fa-heart"></i></span></p>
                             <p className="product-title">{item.title}</p>
                            <p className="location">{item.productType}</p>
                             <p className="time">{item.createdAt}</p>
@@ -71,8 +81,8 @@ const Products = () => {
                 <div className="product-container">
                     {product.filter(item => item.category === 'Electronics & Home').slice(0, 4).map((item, index) => (
                         <div className="product-card" key={index} onClick={()=> openModal(item,false)}>
-                            <img src={car} alt="" className='product-img' />
-                            <p className='price'>RS {item.price}  <span><i className="fa-regular fa-heart"></i></span></p>
+                            <img src={item.productImage? item.productImage:car} alt="" className='product-img' />
+                            <p className='price'><span className='price p-price'>RS {item.price}</span>  <span><i className="fa-regular fa-heart"></i></span></p>
                             <p className="product-title">{item.title}</p>
                            <p className="location">{item.productType}</p>
                             <p className="time">{item.createdAt}</p>
@@ -81,8 +91,8 @@ const Products = () => {
                 <div className="product-container">
                     {product.filter(item => item.category === 'Furniture & Home Decor').slice(0, 4).map((item, index) => (
                         <div className="product-card" key={index} onClick={()=> openModal(item,false)}>
-                            <img src={car} alt="" className='product-img' />
-                            <p className='price'>RS {item.price}  <span><i className="fa-regular fa-heart"></i></span></p>
+                            <img src={item.productImage? item.productImage:car} alt="" className='product-img' />
+                            <p className='price'> <span className='price p-price'>RS {item.price}</span> <span><i className="fa-regular fa-heart"></i></span></p>
                             <p className="product-title">{item.title}</p>
                            <p className="location">{item.productType}</p>
                             <p className="time">{item.createdAt}</p>
@@ -91,8 +101,8 @@ const Products = () => {
                 <div className="product-container">
                     {product.filter(item => item.category === 'Kids').slice(0, 4).map((item, index) => (
                         <div className="product-card" key={index} onClick={()=> openModal(item,false)}>
-                            <img src={car} alt="" className='product-img' />
-                            <p className='price'>RS {item.price}  <span><i className="fa-regular fa-heart"></i></span></p>
+                            <img src={item.productImage? item.productImage:car} alt="" className='product-img' />
+                            <p className='price'><span className='price p-price'>RS {item.price}</span>  <span><i className="fa-regular fa-heart"></i></span></p>
                             <p className="product-title">{item.title}</p>
                           <p className="location">{item.productType}</p>
                             <p className="time">{item.createdAt}</p>
@@ -101,8 +111,8 @@ const Products = () => {
                 <div className="product-container">
                     {product.filter(item => item.category === 'Jobs').slice(0, 4).map((item, index) => (
                         <div className="product-card" key={index} onClick={()=> openModal(item,false)}>
-                            <img src={car} alt="" className='product-img' />
-                            <p className='price'>RS {item.price}  <span><i className="fa-regular fa-heart"></i></span></p>
+                            <img src={item.productImage? item.productImage:car} alt="" className='product-img' />
+                            <p className='price'><span className='price p-price'>RS {item.price}</span>  <span><i className="fa-regular fa-heart"></i></span></p>
                             <p className="product-title">{item.title}</p>
                            <p className="location">{item.productType}</p>
                             <p className="time">{item.createdAt}</p>
@@ -110,7 +120,7 @@ const Products = () => {
             </div>
                         <Footer/>
             {selectedProduct &&(
-            <ProductModal product={selectedProduct} onClose={closeModal} isMyProfile={false}/>
+            <ProductModal Products={selectedProduct} onClose={closeModal} isMyProfile={false}/>
             )}</>
     )
 

@@ -1,16 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-const baseURL = 'https://olx-server-livid.vercel.app'
+import { Form } from "react-router-dom";
+const baseURL = 'https://olx-server-livid.vercel.app' 
 let token = localStorage.getItem('token')
-export const addProduct = createAsyncThunk('addProduct', async (data, { rejectWithValue }) => {
+export const addProduct = createAsyncThunk('addProduct', async (formData, { rejectWithValue }) => {
     try {
-        const response =await fetch(`${baseURL}3/product`, {
+        const response =await fetch('http://localhost:3003/product', {
             method: 'POST',
             credentials: 'include',
             headers: {
-                "Content-Type": "application/json",
+                // "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
-            body: JSON.stringify(data)
+            body: formData
         })
 
         const result = await response.json()
@@ -24,7 +25,7 @@ export const addProduct = createAsyncThunk('addProduct', async (data, { rejectWi
 
 export const getProduct = createAsyncThunk('getProducts', async (data, { rejectWithValue }) => {
     try {
-        const response =await fetch(`${baseURL}/getproducts`, {
+        const response =await fetch('http://localhost:3003/getproducts', {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -44,7 +45,7 @@ export const getProduct = createAsyncThunk('getProducts', async (data, { rejectW
 export const getMyProduct = createAsyncThunk('getMyProducts', async (data, { rejectWithValue }) => {
     
     try {
-        const response =await fetch(`${baseURL}/myProducts`, {
+        const response =await fetch('http://localhost:3003/myProducts', {
             method: 'GET',
             credentials: 'include',
             headers: {
@@ -62,10 +63,27 @@ export const getMyProduct = createAsyncThunk('getMyProducts', async (data, { rej
     }
 })
 
+export const getSelectedProduct = createAsyncThunk('getSelectedProduct', async ({page, limit, category}, { rejectWithValue }) => {
+    try {
+        const response =await fetch(`http://localhost:3003/getSelectedProducts?limit=${limit}&page=${page}&category=${category}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        
+        const result = await response.json()
+        console.log(result)
+        return result
+        
+    } catch (error) {
+        return rejectWithValue(error.message || 'Network error')
+    }
+})
 
  export const updateProduct = createAsyncThunk('updateProduct', async ({id,data}, { rejectWithValue }) => {
                     try {
-                        const response =await fetch(`${baseURL}/product/${id}`, {
+                        const response =await fetch(`http://localhost:3003/product/${id}`, {
                             method: 'PUT',
                             credentials: 'include',
                             headers: {
@@ -87,7 +105,7 @@ export const getMyProduct = createAsyncThunk('getMyProducts', async (data, { rej
                 })
 export const deleteProduct = createAsyncThunk('deleteProduct', async ({id,data}, { rejectWithValue }) => {
                     try {
-                        const response =await fetch(`${baseURL}/product/${id}`, {
+                        const response =await fetch(`http://localhost:3003/product/${id}`, {
                             method: 'POST',
                             credentials: 'include',
                             headers: {

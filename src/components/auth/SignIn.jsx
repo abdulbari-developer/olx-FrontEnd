@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { signIn } from '../../features/auth/authAction'
-
+  import {toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignIn = () => {
   const [data, setdata] = useState({})
@@ -21,6 +22,15 @@ const SignIn = () => {
     e.preventDefault()
     const dis = await dispatch(signIn(data))
   }
+   useEffect(() => {
+    if (message) {
+      if (user?.status === 0) {
+        toast.error(message, { theme: 'colored' })
+      } else {
+        toast.success(message, { theme: 'colored' })
+      }
+    }
+  }, [message])
   useEffect(() => {
    if (user?.status===3) {
     navigate('/')

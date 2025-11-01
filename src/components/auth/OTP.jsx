@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { otp } from '../../features/auth/authAction'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+  import {toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const OTP = () => {
   const [data, setdata] = useState({})
@@ -21,6 +23,15 @@ const OTP = () => {
 
  }
  useEffect(() => {
+     if (message) {
+       if (user?.status === 0) {
+         toast.error(message, { theme: 'colored' })
+       } else {
+         toast.success(message, { theme: 'colored' })
+       }
+     }
+   }, [message])
+ useEffect(() => {
  if (user?.status===2) {
   navigate('/Login')
 }
@@ -33,8 +44,8 @@ const OTP = () => {
         <form onSubmit={handleSubmit}>
              <h1 className='h1 signUp-h1'> OTP Verification</h1>
                {loading && <h1>LOADING.......</h1>}
-        {error && <p>{message}</p>}
-        {message && <p>{message}</p>}
+        {error && toast.error(message)}
+        
              <input type="email" name='email' className='input otp-input' placeholder='Enter your email' onChange={handleUpdate}/>
              <input type="number" name='otp'  className='input otp-input' placeholder='Enter your 6 digit OTP' onChange={handleUpdate}/>
              <button className='btn signIn-btn' type='submit'>Verify OTP</button>

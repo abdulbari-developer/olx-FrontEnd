@@ -42,7 +42,7 @@ const BoxexCategory = () => {
             },
             {
                  index :5,
-                 title: 'Electronics & Home...',
+                 title: 'Electronics & Home',
                  img : electronic, 
             },
             {
@@ -52,7 +52,7 @@ const BoxexCategory = () => {
             },
             {
                  index :7,
-                 title: 'Business & Industrial....',
+                 title: 'Business & Industrial',
                  img : industry, 
             },
             {
@@ -94,7 +94,7 @@ const BoxexCategory = () => {
         let navigate = useNavigate()
         const handleCategorySelect=(category)=>{
             setselectCategary(category)
-            navigate(`/Categories/${category}`)
+navigate(`/category/${category}`)
         }
   return (
     <div>

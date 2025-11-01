@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Categories from './Categories'
 import car from '../../assets/img/im.jpg'
 import { Link } from 'react-router-dom'
 import Chat from './Chat'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteProduct, updateProduct } from '../../features/product/productAction'
+import { deleteProduct, updateProduct,getProduct } from '../../features/product/productAction'
 import Navbar from './Navbar'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
-const ProductModal = ({product,onClose, isMyProfile}) => {
+const ProductModal = ({Products,onClose, isMyProfile, onUpdate}) => {
   const {product:productState,error,loading,message} = useSelector(state => state.product)
   const [isEdit, setisEdit] = useState(false)
   const dispatch = useDispatch()
@@ -21,7 +23,7 @@ const ProductModal = ({product,onClose, isMyProfile}) => {
   })
     let categories = ["Mobiles", "Vehicles", 'Properties For Sale', 'Properties For Rent', 'Electronics & Home', 'Bikes', "Business & Industrial", 'Services', 'Jobs', 'Animal', 'Furniture & Home Decor', 'Fashion & Beauty', 'Books, Sports & Hobbies', 'Kids']
    let type = ['New', 'Used']
-  if (!product) return null;
+  if (!Products) return null;
   const handleUpdate = (e)=>{
         e.preventDefault()
         setdata({
@@ -46,6 +48,7 @@ const ProductModal = ({product,onClose, isMyProfile}) => {
   dispatch(updateProduct({id: currentID,data}))
         setcurrentID(null)
         setisEdit(false)
+
   }
   const handleClear = ()=>{
 setdata({
@@ -57,6 +60,21 @@ setdata({
 })
 
 }
+
+  useEffect(() => {
+    if (message) {
+      onUpdate && onUpdate() 
+    }
+  }, [message])
+  useEffect(() => {
+      if (message) {
+        if (productState?.status === 0) {
+          toast.error(message, { theme: 'colored' })
+        } else {
+          toast.success(message, { theme: 'colored' })
+        }
+      }
+    }, [message])
   return (
     <>
     
@@ -64,8 +82,8 @@ setdata({
       {isEdit && (
   <form onSubmit={handleSubmit} className="form-container">
   {loading && <h1>LOADING.......</h1>}
-  {error && <p className="error-message">{message}</p>}
-  {message && <p className="success-message">{message}</p>}
+  {error && toast.error({message})}
+ 
 
   <h1 className="form-title">Edit Product Details</h1>
 
@@ -102,18 +120,18 @@ setdata({
      <div className="modal-container">
 
       <div className="modal-left">
-       <img src={car} alt="" />
+       <img src={Products.productImage? Products.productImage:car} alt="" />
       </div>  
       <div className="modal-right">
         <p className='modal-closer' onClick={onClose}>❌</p>
-        <h1 className='modal-h1'>{product.title}</h1>
-        <p className='modal-price'>Price : {product.price}pkr</p>
-        <p className="modal-desc">{product.description}</p>
-        <p className="modal-location">{product.productType}</p>
-        <p className="modal-time">{product.createdAt}</p>
+        <h1 className='modal-h1'>{Products.title}</h1>
+        <p className='modal-price'>Price : {Products.price}pkr</p>
+        <p className="modal-desc">{Products.description}</p>
+        <p className="modal-location">{Products.productType}</p>
+        <p className="modal-time">{Products.createdAt}</p>
         {isMyProfile? <>
-        <button className="edit-btn" onClick={()=> {setisEdit(true); handleEdit(product);}}>Edit</button>
-        <button className="delete-btn" onClick={()=>  dispatch(deleteProduct({id:product._id}))}>Delete</button></>:
+        <button className="edit-btn" onClick={()=> {setisEdit(true); handleEdit(Products);}}>Edit</button>
+        <button className="delete-btn" onClick={()=>  dispatch(deleteProduct({id:Products._id}))}>Delete</button></>:
         <Link className='modal-btn chat-btn' to='/Chat'>Chat</Link>
         }
         </div>

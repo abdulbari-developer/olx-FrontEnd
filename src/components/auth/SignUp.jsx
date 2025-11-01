@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { signUP } from '../../features/auth/authAction'
 import { useNavigate,Link } from 'react-router-dom'
-
+  import {toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const SignUp = () => {
   const [data, setdata] = useState({})
   const {error,loading,user,message}= useSelector((state)=> state.auth)
@@ -21,6 +22,17 @@ const SignUp = () => {
     const dis = await dispatch(signUP(data))
   }
   useEffect(() => {
+      if (message) {
+        if (user?.status === 0) {
+          toast.error(message, { theme: 'colored' })
+        } else {
+          toast.success(message, { theme: 'colored' })
+        }
+      }
+    }, [message])
+
+   
+  useEffect(() => {
   if (user?.status===1) {
     navigate('/OTP')
   }
@@ -30,8 +42,8 @@ const SignUp = () => {
     <>
       <div className="signIn">
         {loading && <h1>LOADING.......</h1>}
-        {error && <p>{message}</p>}
-        {message && <p>{message}</p>}
+        {error && toast.error({message})}
+
         <div className="card">
           <form action="" onSubmit={submitData}>
              <h1 className='h1 signIn-h1'> Sign In</h1>
