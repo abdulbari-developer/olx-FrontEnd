@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Form } from "react-router-dom";
-const baseURL = 'https://olx-server-livid.vercel.app' 
+// const baseURL = 'https://olx-server-livid.vercel.app' 
 let token = localStorage.getItem('token')
 export const addProduct = createAsyncThunk('addProduct', async (formData, { rejectWithValue }) => {
     try {
-        const response =await fetch('http://localhost:3003/product', {
+        const response =await fetch('olx-backend-iota.vercel.app/product', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -25,7 +25,7 @@ export const addProduct = createAsyncThunk('addProduct', async (formData, { reje
 
 export const getProduct = createAsyncThunk('getProducts', async (data, { rejectWithValue }) => {
     try {
-        const response =await fetch('http://localhost:3003/getproducts', {
+        const response =await fetch('olx-backend-iota.vercel.app/getproducts', {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -45,7 +45,7 @@ export const getProduct = createAsyncThunk('getProducts', async (data, { rejectW
 export const getMyProduct = createAsyncThunk('getMyProducts', async (data, { rejectWithValue }) => {
     
     try {
-        const response =await fetch('http://localhost:3003/myProducts', {
+        const response =await fetch('olx-backend-iota.vercel.app/myProducts', {
             method: 'GET',
             credentials: 'include',
             headers: {
@@ -65,7 +65,7 @@ export const getMyProduct = createAsyncThunk('getMyProducts', async (data, { rej
 
 export const getSelectedProduct = createAsyncThunk('getSelectedProduct', async ({page, limit, category}, { rejectWithValue }) => {
     try {
-        const response =await fetch(`http://localhost:3003/getSelectedProducts?limit=${limit}&page=${page}&category=${category}`, {
+        const response =await fetch(`olx-backend-iota.vercel.app/getSelectedProducts?limit=${limit}&page=${page}&category=${category}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -83,7 +83,7 @@ export const getSelectedProduct = createAsyncThunk('getSelectedProduct', async (
 
  export const updateProduct = createAsyncThunk('updateProduct', async ({id,data}, { rejectWithValue }) => {
                     try {
-                        const response =await fetch(`http://localhost:3003/product/${id}`, {
+                        const response =await fetch(`olx-backend-iota.vercel.app/product/${id}`, {
                             method: 'PUT',
                             credentials: 'include',
                             headers: {
@@ -105,7 +105,7 @@ export const getSelectedProduct = createAsyncThunk('getSelectedProduct', async (
                 })
 export const deleteProduct = createAsyncThunk('deleteProduct', async ({id,data}, { rejectWithValue }) => {
                     try {
-                        const response =await fetch(`http://localhost:3003/product/${id}`, {
+                        const response =await fetch(`olx-backend-iota.vercel.app/product/${id}`, {
                             method: 'POST',
                             credentials: 'include',
                             headers: {

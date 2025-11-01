@@ -32,11 +32,9 @@ const Products = () => {
       }, [message])
     return (
         <>
-             
             <div className='products'>
                 {loading && <h1>LOADING.......</h1>}
         {error && toast.error({message})}
-    
                 <h2 className='products-h2'>Mobiles</h2>
                 <div className="product-container">
         {product.filter(item => item.category === 'Mobiles').slice(0, 4).map((item, index) => (
