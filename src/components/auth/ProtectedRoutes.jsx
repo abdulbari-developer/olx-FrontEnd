@@ -8,7 +8,7 @@ export const ProtectedRoutes = ({children}) => {
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
     const checkUser = async()=>{
-        const response = await fetch('olx-backend-iota.vercel.app/user/auth/me',{
+        const response = await fetch('https://olx-backend-iota.vercel.app/user/auth/me',{
             method:'GET',
             credentials:'include',
             headers:{

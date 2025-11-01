@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 // const baseURL = 'https://olx-server-livid.vercel.app'
 export const signUP = createAsyncThunk('signUp',async(data,{rejectWithValue})=>{
 try{
-  const responce = await fetch('olx-backend-iota.vercel.app/user/user/register',{
+  const responce = await fetch('https://olx-backend-iota.vercel.app/user/user/register',{
     method:"POST",
     headers:{
         "Content-Type": "application/json",
@@ -22,7 +22,7 @@ catch(err){
 
 export const otp = createAsyncThunk('otp',async(data,{rejectWithValue})=>{
 try{
-  const responce = await fetch('olx-backend-iota.vercel.app/user/user/verifyOTP',{
+  const responce = await fetch('https://olx-backend-iota.vercel.app/user/user/verifyOTP',{
     method:"POST",
     headers:{
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ catch(err){
 
 export const signIn = createAsyncThunk('signIn',async(data,{rejectWithValue})=>{
 try{
-  const responce = await fetch('olx-backend-iota.vercel.app/user/user/login',{
+  const responce = await fetch('https://olx-backend-iota.vercel.app/user/user/login',{
     method:"POST",
     headers:{
         "Content-Type": "application/json",
